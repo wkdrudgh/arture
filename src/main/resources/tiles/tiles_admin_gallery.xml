@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="/admin/gallery/galleryList" extends="AdminBaseLayout">
+	      <put-attribute name="title" value="승인된 작품 목록" />
+	      <put-attribute name="body" value="/WEB-INF/views/admin/gallery/galleryList.jsp" />
+	</definition>
+
+	<definition name="/admin/gallery/galleryView" extends="AdminBaseLayout">
+	      <put-attribute name="title" value="승인된 작품 상세페이지" />
+	      <put-attribute name="body" value="/WEB-INF/views/admin/gallery/galleryView.jsp" />
+	</definition>
+	
+</tiles-definitions>

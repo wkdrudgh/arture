@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.mypage">
+<resultMap id="userResult" type="memberVO"> 
+    <result property="id" column="id" />
+    <result property="pwd" column="pwd" />
+    <result property="name" column="name" />
+    <result property="gender" column="gender" />
+    <result property="email" column="email" />
+    <result property="profileImage" column="profileImage" />
+    <result property="profileText" column="profileText" />
+    <result property="sns_i" column="sns_i" />
+    <result property="sns_f" column="sns_f" />
+    <result property="sns_b" column="sns_b" />
+    <result property="joinDate" column="joinDate" />
+  </resultMap>
+  
+ <resultMap id="favoriteResult" type="favoriteVO">
+ 	<result property="id" column="id" />
+ 	<result property="galleryNO" column="galleryNO" />
+ </resultMap>
+ 
+ <resultMap id="galleryResult" type="galleryVO">
+ 	<result property="id" column="id" />
+ 	<result property="hashtag" column="hashtag" />
+ 	<result property="title" column="title" />
+ 	<result property="content" column="content" />
+ 	<result property="imageFileName" column="imageFileName" />
+ 	<result property="category" column="category" />
+ 	<result property="galleryNO" column="galleryNO" />
+ </resultMap>
+
+<!--회원 정보 가져오기-->
+  	<select id="selectUserInfo" resultMap="userResult"   parameterType="String" >
+    <![CDATA[
+	  SELECT * 
+	  FROM o_member
+	  where id=#{id}
+    ]]>
+  	</select>
+  	
+ <!-- 좋아요 가져오기 -->
+  <select id ="selectfavorite" resultMap="favoriteResult"  parameterType="String">
+      <![CDATA[
+	  SELECT * 
+	  FROM o_favorite
+	  where id=#{id}
+    ]]>  
+  </select>
+
+  <!-- 좋아요 게시글가져오기-->
+   <select id ="favoritegallery" resultMap="galleryResult"  parameterType="int">
+      <![CDATA[
+	  SELECT * 
+	  FROM o_gallery
+	  where galleryNO=#{galleryNO}
+    ]]>
+  </select> 
+  
+   <!-- 좋아요 중복확인 -->
+  <select id="selectOverlappedFavorite" parameterType="favoriteVO" resultType="int">
+   	 <![CDATA[
+	   select decode(count(*),0,'0',1,'1')
+	   from o_favorite
+	   where id = #{id} and galleryNO=#{galleryNO}
+	  ]]>
+	</select>
+  
+  <!-- 내 게시글 불러오기 -->
+   <select id ="selectmygallery" resultMap="galleryResult"  parameterType="String">
+      <![CDATA[
+	  SELECT * 
+	  FROM o_gallery
+	  where id=#{id}
+    ]]>
+  </select> 
+
+ <!-- 비밀번호 확인 -->
+<select id="confirmpassword" parameterType="java.util.Map" resultType="int">
+ <![CDATA[
+	  SELECT count(*)
+	  FROM o_member
+	  where id=#{id} AND pwd=#{pwd}
+    ]]>
+</select>
+
+ <!-- 좋아요받은 수 -->
+<select id="countfavorite" parameterType="String" resultType="int">
+ <![CDATA[
+	  SELECT count(*)
+	  FROM o_favorite
+	  where id=#{id}
+    ]]>
+</select>
+
+ <!-- 작성한 게시글 수 -->
+<select id="countgallery" parameterType="String" resultType="int">
+ <![CDATA[
+	  SELECT count(*)
+	  FROM o_gallery
+	  where id=#{id}
+    ]]>
+</select>
+ 
+  <!-- 좋아요 추가 -->
+ <insert id="insertfavorite" parameterType="favoriteVO">
+ 	<![CDATA[
+ 	insert into o_favorite (
+ 	id, galleryNO)
+ 	values(#{id}, #{galleryNO})
+ 	]]>
+ </insert>
+ 
+ <!--프로필 수정  -->
+  	<update id="updateProfile"  parameterType="java.util.Map">
+			update o_member
+			set email=#{email}
+			, profileText=#{profileText}
+			, sns_i=#{sns_i}
+			, sns_f=#{sns_f}
+			, sns_b=#{sns_b}
+			 <if test="profileImage!='' and profileImage!=null">
+			, profileImage=#{profileImage}
+			</if>
+			where id=#{id}
+	</update>
+	
+ <!--프로필 이미지 수정  -->
+  	<update id="updateProfileimage"  parameterType="java.util.Map">
+			update o_member
+			set profileImage=#{profileImage}
+			where id=#{id}
+	</update>	
+	
+ <!-- 좋아요 삭제 -->
+ <delete id="deletefavorite" parameterType="String">
+ 	<![CDATA[
+ 		delete from o_favorite
+ 		where galleryNO=#{galleryNO}
+ 	]]>
+ </delete> 
+ 
+ <!-- 좋아요 취소 -->
+<delete id="cancelfavorite" parameterType="favoriteVO">
+ 	<![CDATA[
+ 		delete from o_favorite
+ 		where id=#{id} and galleryNO=#{galleryNO}
+ 	]]>	
+</delete> 
+
+<!-- 내 게시글삭제 -->
+<delete id="deletemygallery" parameterType="favoriteVO">
+ 	<![CDATA[
+ 		delete from o_gallery
+ 		where id=#{id} and galleryNO=#{galleryNO}
+ 	]]>	
+</delete> 
+  
+</mapper>

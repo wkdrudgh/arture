@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.gallery">	
+	<resultMap id="galResult" type="galleryVO" >
+		<result property="galleryNO" column="galleryNO"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="category" column="category"/>
+		<result property="hashtag" column="hashtag"/>
+		<result property="regDate" column="regDate"/>
+		<result property="id" column="id"/>
+	</resultMap>
+
+	<resultMap id="imgResult" type="imageVO">
+		<result property="imageNO" column="imageNO" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="regDate" column="regDate" />
+		<result property="applyNO" column="applyNO" />
+	</resultMap>
+	
+	<!-- 갤러리 정보 검색 -->
+	<select id="selectGalleryList" resultMap="galResult">	
+		select * from o_gallery order by galleryNO desc
+	</select>
+	
+	<!-- 좋아요 값 검색 -->
+	<select id="selectLike" resultType="int" parameterType="int">
+		select count(*) from o_favorite where galleryNO = #{galleryNO} 	
+	</select>
+	
+	<!-- detail 이미지리스트 -->
+	<select id="selectImageFileList" resultMap="imgResult" parameterType="int">
+	    <![CDATA[
+		 	SELECT * from o_imagefile
+		 	where applyNO = #{applyNO}
+	 	]]>
+	</select>
+	
+	<!-- 좋아요 겔러리 불러오기  -->
+		<select id="selectGallery" resultType="galleryVO" parameterType="int">
+	    <![CDATA[
+	      SELECT * from o_gallery
+	      where galleryNO = #{galleryNO}		
+	    ]]>
+	</select>
+</mapper>
+

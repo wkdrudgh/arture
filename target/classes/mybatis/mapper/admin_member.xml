@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin_member">
+   <resultMap id="adminMemberResult" type="MemberVO">
+      <result property="id" column="id" />
+        <result property="pwd" column="pwd" />
+        <result property="name" column="name" />
+        <result property="gender" column="gender" />
+        <result property="email" column="email" />
+        <result property="profileImage" column="profileImage" />
+        <result property="profileText" column="profileText" />
+        <result property="sns_i" column="sns_i" />
+        <result property="sns_f" column="sns_f" />
+        <result property="sns_b" column="sns_b" />
+        <result property="joinDate" column="joinDate" />
+   </resultMap> 
+
+   <select id="selectAllMembers" resultMap="adminMemberResult">
+      <![CDATA[
+         select * from o_member   order by joinDate desc       
+      ]]>
+   </select>
+   
+   <select id="apply" resultType="int" parameterType="String">
+      <![CDATA[
+         select applyNO from o_applyForm where id = #{id}       
+      ]]>
+   </select>
+   
+   <select id="gallery" resultType="int" parameterType="String">
+      <![CDATA[
+        select galleryNO from o_gallery   where id = #{id}          
+      ]]>
+   </select>
+   
+   <update id="updatePwd" parameterType="MemberVO">
+      <![CDATA[
+        update o_member
+        set pwd=#{pwd}
+        where
+        id=#{id}
+      ]]>
+   </update>
+   <!-- 멤버 지우기 -->
+   <delete id="deleteMember" parameterType="String">
+      <![CDATA[
+         delete from o_member where id=#{id}
+      ]]>
+   </delete>
+   
+   <!-- 이미지리스트 지우기 -->
+   <delete id="deleteimagelist" parameterType="int">
+      <![CDATA[
+         delete from o_imagefile where applyNO=#{applyNO}
+      ]]>
+   </delete>
+   
+      <!-- 좋아요 지우기 -->
+   <delete id="deletefavorite" parameterType="String">
+      <![CDATA[
+         delete from o_favorite where id=#{id}
+      ]]>
+   </delete>
+   
+      <!-- 지원서 지우기 -->
+   <delete id="deleteapply" parameterType="String">
+      <![CDATA[
+         delete from o_applyform where id=#{id}
+      ]]>
+   </delete>
+   
+      <!-- 겔러리 지우기 -->
+   <delete id="deletegallery" parameterType="String">
+      <![CDATA[
+         delete from o_gallery where id=#{id}
+      ]]>
+   </delete>
+    
+</mapper>

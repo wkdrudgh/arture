@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.applyForm">
+	<resultMap id="ArticleVO" type="articleVO">
+		<result property="applyNO" column="applyNO"></result>
+		<result property="title" column="title"></result>
+		<result property="content" column="content"></result>
+		<result property="imageFileName" column="imageFileName"></result>
+		<result property="category" column="category"></result>
+		<result property="hashtag" column="hashtag"></result>
+		<result property="id" column="id"></result>
+	</resultMap>
+	<resultMap id="ImageVO" type="imageVO">
+		<result property="imageNO" column="imageNO"></result>
+		<result property="imageFileName" column="imageFileName"></result>
+		<result property="regDate" column="regDate"></result>
+		<result property="applyNO" column="applyNO"></result>
+	</resultMap>
+	
+	
+	<insert id="insertNewArticle" parameterType="java.util.Map">
+		<selectKey resultType="int" keyProperty="applyNO" order="BEFORE">
+	    	select apply_no.nextval from dual
+	    </selectKey>
+		<![CDATA[
+		insert into o_applyform (applyNO,title,content,imageFileName,category,hashtag,id)
+		 values(#{applyNO}, #{title}, #{content}, #{imageFileName}, #{category}, #{hashtag} , #{id})
+		]]>
+	</insert>
+	
+	<insert id="insertNewImage" parameterType="ImageVO">
+		<selectKey resultType="int" keyProperty="imageNO" order="BEFORE">
+	    	select image_no.nextval from dual
+	    </selectKey>
+			insert into o_imageFile(imageNO, imageFileName, applyNO)
+			values (#{imageNO}, #{imageFileName}, #{applyNO})
+	</insert>
+	
+	<select id="selectNewapplyNO" resultType="int">
+		<![CDATA[
+			select max(applyNO) from o_applyform
+		]]>
+	</select>
+
+</mapper>

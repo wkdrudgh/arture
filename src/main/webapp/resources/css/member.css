@@ -1,0 +1,129 @@
+input:focus {
+	outline:none;
+}
+
+/* 로그인창 CSS */
+	#loginWrapper{
+		width:100%;
+		height:900px;
+		/* background:url('../../resources/image/login_bg.jpg'); */
+		color:#fff;
+	}
+	#loginWrapper form{
+		width:300px;
+		height:300px;
+		position:absolute;
+		top:55%;
+		left:50%;
+		transform: translateX(-50%);
+	}
+	#loginWrapper form td{
+		display:block;
+		width:300px;
+		height:50px;
+		border:1px solid #333;
+		background:rgba(0,0,0,0.2);
+		border-radius:50px;
+		margin-bottom:20px;
+		font-family: 'Noto Sans', sans-serif;
+	}
+	#loginWrapper form td:focus{
+		border:1px solid #fff;
+	}
+	#loginWrapper form td.td1{
+		border:none;
+		background-color:#ff5779;
+	}
+	#loginWrapper form td.td1 input{
+		background-color:transparent;
+		border:none;
+		color:#fff;
+		font-size:18px;
+		line-height:50px;
+	}
+	#loginWrapper form input.input1{
+		width:80%;
+		height:50px;
+		background-color:transparent!important;
+		border:none;
+		color:#fff;
+		font-size: 16px;
+	}
+
+
+
+/* 회원가입창 CSS */
+	#joinWrapper{
+		width:100%;
+		height:900px;
+	}
+	#joinWrapper form{
+		width:500px;
+		height:500px;
+		position:absolute;
+		top:150px;
+		left:50%;
+		transform: translateX(-50%);
+		text-align:left;
+	}
+	#joinWrapper form p {
+		font-size:18px;
+		font-weight:bold;
+	}
+	#joinWrapper form td input{
+		display: block;
+	    width: 500px;
+	    height: 35px;
+	    border: 1px solid #444;
+	    border-radius: 5px;
+	    background-color: rgba(255,255,255,0.15);
+	    margin-bottom: 20px;
+	    margin-top: 10px;
+	    color: #fff;
+	    font-size:16px;
+
+	}
+	#joinWrapper form td input:focus{
+		border: 1px solid #aaa;
+	}
+	#joinWrapper form td.td1 input{
+		width:200px;
+		height:50px;
+		margin:0 auto;
+		border:none;
+		border-radius:50px;
+		background-color:#ff5779;
+		font-size:18px;
+		line-height:50px;
+		border-bottom:none;
+		margin-top:50px;
+		cursor:pointer;
+	}
+	#joinWrapper form input.radio{
+		display:inline-block;
+		width:50px;
+		height:20px;
+	}
+	#joinWrapper form input#btnOverlapped {
+		display: inline-block;
+	    width: 100px;
+	    height: 38px;
+	    border:none;
+	    border-radius: 38px;
+	    background: #464646;
+	    cursor:pointer;
+	    font-size: 14px;
+	    margin-left: 15px;
+	}
+
+	.fa-check-circle{
+		font-size:25px;
+		color:#fff;
+		margin-left:15px;
+	}
+
+	
+	#joinWrapper form input.radio span{
+		line-height:20px;
+	}
+

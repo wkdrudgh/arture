@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin_gallery">
+	<resultMap id="adminGalleryListResult" type="galleryVO">
+		<result property="galleryNO" column="galleryNO" />
+		<result property="title" column="title" />
+		<result property="id" column="id" />
+	</resultMap> 
+	
+	<resultMap id="adminGalleryContentsResult" type="galleryVO">
+		<result property="galleryNO" column="galleryNO" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="category" column="category" />
+		<result property="hashtag" column="hashtag" />
+		<result property="id" column="id" />
+	</resultMap>
+	
+	<resultMap id="adminGalleryImageResult" type="imageVO">
+		<result property="imageNO" column="imageNO" />
+		<result property="imageFileName" column="imageFileName" />
+		<result property="regDate" column="regDate" />
+		<result property="applyNO" column="applyNO" />
+	</resultMap>
+
+	<select id="selectAllLists" resultMap="adminGalleryListResult">
+      <![CDATA[
+         select * from o_gallery order by galleryNO	 	
+      ]]>
+	</select>
+	
+	<select id="selectGallery" resultMap="adminGalleryListResult" parameterType="int">
+      <![CDATA[
+         select * from o_gallery where galleryNO = #{galleryNO}	 	
+      ]]>
+	</select>
+	
+	
+	<delete id="deleteGallery" parameterType="int">
+		<![CDATA[
+			delete from o_gallery where galleryNO = #{galleryNO}
+		]]>
+	</delete>
+
+    
+</mapper>

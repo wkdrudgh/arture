@@ -1,0 +1,146 @@
+section{
+	width: 100%;
+	height: auto;
+}
+
+.thumbnail-form{
+	width: 80%;
+	margin: 0 auto;
+	/* 전이가 일어날 속성값을 정의 */ 
+	transition-property: height; 
+	/* 전이가 발생되는 시간 명시 */ 
+	transition-duration: 0.7s; /* 1000밀리초와 같다 */
+
+}
+.thumbnail-form .thumbnail {
+    height: 430px;
+    width: 25%;
+    float: left;
+    margin: 4%;
+    border-radius: 5px;
+    border: solid 1px #333; 
+} 
+.thumbnail-form .thumbnail:hover{
+	
+	 border: solid 1px #fff; 
+}
+a.gallery-form{
+	display:block;
+	width: 100%;
+    height: 245px;
+    overflow: hidden;
+
+}
+
+.nonActive{
+	display:none;
+}
+.thumbnail-form p{
+	text-align : left;
+	font-size: 20px;
+	padding-top: 12px;
+}
+/* 검색창 스타일 */
+input:focus {
+    outline: none;
+}
+.search{
+	width: 600px;
+	margin: auto;
+	padding-top:100px;
+}
+input::placeholder {
+    color: white;
+}
+input#keyword{
+	width: 300px;
+    height: 50px;
+    background-color: transparent; 
+    text-decoration: none;
+    border: none;
+    border-bottom: solid 2px white;
+    font-size: 18px;
+   	color: white;
+}
+input#keyword::placeholder{
+	color:#464646;
+}
+.searchBtn {
+	width: 44px;
+    cursor: pointer;
+    height: 44px;
+    background: #464646;
+    border-radius: 44px;
+    display: inline-block;
+}
+.searchBtn .fa-search{
+	color: white;
+    position: relative;
+    top: 12px;
+    font-size: 20px;
+}
+.fa-tag{
+	font-size:16px;
+}
+
+/* 이미지 스타일 */
+
+.gallery-img{
+	width: 100%;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    object-fit: cover;
+}
+
+
+.gallery-caption{
+	padding-left: 24px;
+}
+.gallery-caption p {
+	color:#ddd;
+}
+.gallery-caption .g_title{
+	font-size:25px;
+	color:#fff;
+}
+
+#selectBox{
+	appearance: none;
+    outline: none;
+    width: 150px;
+    font-size: 18px;
+    height: 55px;
+    font-size:18px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-bottom: 2px solid #fff;
+}
+#selectBox option{
+	font-size: 18px;
+	background: rgba(0,0,0,0.3);
+}
+#selectBox option:hover{
+	background: rgba(0,0,0,0.8);
+}
+.moreBtn {
+	width:100%;
+	float:left;
+	margin-top:100px;
+	margin-bottom:100px;
+}
+.moreBtn #load {
+	width:200px;
+	height:50px;
+	background:#464646;
+	border:none;
+	border-radius:50px;
+	font-size:18px;
+	color:#fff;
+	cursor:pointer;
+}
+#load:hover {
+	background:#fff;
+	color:#000;
+}

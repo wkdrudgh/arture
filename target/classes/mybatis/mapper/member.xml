@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	<resultMap id="memResult" type="memberVO">
+		<result property="id" column="id" />
+        <result property="pwd" column="pwd" />
+        <result property="name" column="name" />
+        <result property="gender" column="gender" />
+        <result property="email" column="email" />
+        <result property="profileImage" column="profileImage" />
+        <result property="profileText" column="profileText" />
+        <result property="sns_i" column="sns_i" />
+        <result property="sns_f" column="sns_f" />
+        <result property="sns_b" column="sns_b" />
+        <result property="joinDate" column="joinDate" />
+	</resultMap> 
+	
+	<select id="loginById" resultType="memberVO" parameterType="memberVO">
+		<![CDATA[
+         select * from o_member	
+         where id=#{id} and pwd=#{pwd} 	
+      ]]>
+	</select>
+	
+	<select id="selectAllMemberList" resultMap="memResult">
+      <![CDATA[
+         select * from o_member	order by joinDate desc	 	
+      ]]>
+	</select>
+	
+	<select id="selectMemberById" resultType="memberVO"  parameterType="String" >
+      <![CDATA[
+         select * from o_member
+         where
+         id=#{id}			
+      ]]>
+	 </select>	
+	
+	<select id="selectMemberByPwd" resultMap="memResult"  parameterType="int" >
+      <![CDATA[
+         select * from o_member
+         where
+         pwd = #{pwd}			
+      ]]>
+    </select>
+    
+    <!-- 회원 가입 -->
+     <insert id="insertMember"  parameterType="memberVO">
+		<![CDATA[
+		 insert into o_member(id, pwd, name, gender, email)
+		 values(#{id}, #{pwd}, #{name}, #{gender}, #{email})
+		]]>      
+	</insert>
+	
+	<!-- 회원정보수정 -->
+	<update id="updateMember"  parameterType="memberVO">
+     <![CDATA[
+	     update o_member
+	     set pwd=#{pwd}, name=#{name}, gender=#{gender}, email=#{email}
+	     where
+	     id=#{id}
+      ]]>      
+   </update> 
+   
+    <!-- 회원 삭제 -->
+   <delete id="deleteMember"  parameterType="String">
+	<![CDATA[
+	   delete from  o_member
+	   where
+	   id=#{id}
+	]]>      
+  </delete>
+
+	<!--  like 검색 -->
+   <select id="selectLike" resultMap="memResult"  parameterType="String" >
+      <![CDATA[
+         select * from o_member
+         where
+         name like '%' || #{name} || '%'		
+      ]]>
+    </select>
+    
+    <!-- id 중복확인 -->
+    <select id="selectOverlappedID" parameterType="String" resultType="String">
+     <![CDATA[
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from o_member
+	   where id = #{id}
+	  ]]>
+	</select>
+	
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.spring.proOne.main.vo.MainVO"  alias="mainVO" />
+		<typeAlias type="com.spring.proOne.member.vo.MemberVO"  alias="memberVO" />
+		<typeAlias type="com.spring.proOne.gallery.vo.GalleryVO"  alias="galleryVO" />
+		<typeAlias type="com.spring.proOne.gallery.vo.ImageVO"  alias="imageVO" />
+		<typeAlias type="com.spring.proOne.mypage.vo.FavoriteVO"  alias="favoriteVO" />
+		<typeAlias type="com.spring.proOne.applyForm.vo.ArticleVO"  alias="articleVO" />
+		<typeAlias type="com.spring.proOne.admin.notice.vo.NoticeVO"  alias="noticeVO" />
+	</typeAliases>
+</configuration>
