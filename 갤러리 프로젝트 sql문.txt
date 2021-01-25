@@ -1,0 +1,122 @@
+--======= DELETE / DROP =========--
+-- 데이터 지우기              -------
+DELETE FROM o_member;
+DELETE FROM o_applyform;
+DELETE FROM o_gallery;
+DELETE FROM o_imagefile;
+DELETE FROM o_notice;
+DELETE FROM o_favorite;
+-- 시퀀스 지우기              -------
+DROP SEQUENCE apply_no;
+DROP SEQUENCE image_no;
+DROP SEQUENCE notice_no;
+-- 테이블 지우기              -------
+DROP TABLE o_member;
+DROP TABLE o_applyform;
+DROP TABLE o_gallery;
+DROP TABLE o_imagefile;
+DROP TABLE o_notice;
+DROP TABLE o_favorite;
+--=================================
+
+
+--=========== CREATE ============--
+-- Sequence -----------------------
+----------------- Apply_NO Sequence
+CREATE SEQUENCE apply_no
+  START WITH 0
+  INCREMENT BY 1
+  MINVALUE 0
+  NOCYCLE
+  NOCACHE;
+----------------- Image_NO Sequence
+CREATE SEQUENCE image_no
+  START WITH 0
+  INCREMENT BY 1
+  MINVALUE 0
+  NOCYCLE
+  NOCACHE;
+---------------- Notice_NO Sequence
+CREATE SEQUENCE notice_no
+  START WITH 1
+  INCREMENT BY 1
+  MINVALUE 1
+  NOCYCLE
+  NOCACHE;
+
+-- Tables -------------------------
+create table o_member (   
+    id VARCHAR2(20) primary key, 
+    pwd VARCHAR2(30), 
+    name VARCHAR2(20), 
+    gender VARCHAR2(10), 
+    email VARCHAR2(50),
+    profileImage VARCHAR2(100) default 'duke.png',
+    profileText VARCHAR2(2000),
+    sns_i VARCHAR2(100),
+    sns_f VARCHAR2(100),
+    sns_b VARCHAR2(100),
+    joinDate DATE DEFAULT sysdate
+) ;
+
+create table o_applyform (
+    applyNO number primary key,
+    title varchar2(100) NOT NULL,
+    content varchar2(2000),
+    imagefilename varchar2(100) not null,
+    category varchar2(50) not null,
+    hashtag varchar2(100),
+    id varchar2(50)
+);
+create table o_gallery (
+    galleryNo number primary key,
+    title varchar2(100),
+    content varchar2(2000),
+    imagefilename varchar2(100),
+    category varchar2(50),
+    hashtag varchar2(100),
+    id varchar2(50)
+);
+create table o_imagefile (
+    imageNO number primary key,
+    imageFileName varchar2(100),
+    regDate date default sysdate not null,
+    applyNo number
+);
+create table o_notice(
+	noticeNO number(10) primary key,
+	title varchar2(500) not null,
+	content varchar2(4000),
+	writeDate date default sysdate not null
+);
+create table o_favorite(
+    id VARCHAR2(20),
+    galleryNO number
+);
+
+--=========== INSERT ============--
+insert into o_member (id,pwd,name,gender,email,joinDate) values('hong123','1212','홍길동','남','hong123@naver.com',sysdate);
+insert into o_member (id,pwd,name,gender,email,joinDate) values('lee','1111','이순신','남','lee@gmail.com',sysdate);
+insert into o_member (id,pwd,name,gender,email,joinDate) values('kim','1212','김또치','여','kim@naver.com',sysdate);
+insert into o_member (id,pwd,name,gender,email,joinDate) values('doori','3333','차두리','남','doori@daum.net',sysdate);
+insert into o_member (id,pwd,name,gender,email,joinDate) values('admin','1111','ADMIN','남','ADMIN@daum.net',sysdate);
+
+
+-- COMMIT !!!!!!!!!!!!!!!!!!!!!!!!!
+commit;
+
+-- ROLLBACK !!!!!!!!!!!!!!!!!!!!!!!
+--rollback;
+
+
+--=========== SELECT ============--
+-- 모든 시퀀스 출력 -----------------
+SELECT * FROM USER_SEQUENCES;
+-- select tables ------------------
+select * from o_member;
+select * from o_applyform;
+select * from o_gallery;
+select * from o_imagefile;
+select * from o_notice;
+select * from o_favorite;
+select max(applyNO) from o_applyform;
